@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "313188349235",
+    "project_id": "cegepdemo-8f755",
+    "storage_bucket": "cegepdemo-8f755.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313188349235:android:06d54d6864bd0e98e37a46",
+        "android_client_info": {
+          "package_name": "com.example.blood_donation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5PCIn-wRDNo8ewQyP1bJL8AovmWot1BI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
