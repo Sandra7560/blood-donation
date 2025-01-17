@@ -10,7 +10,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormState>();
   String name = '';
-  String address = '';
+  String email = ''; // Change address to email
   String bloodType = '';
   bool isLoading = true; // To track if data is loading
 
@@ -32,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
       if (snapshot.exists) {
         setState(() {
           name = snapshot['name'] ?? '';
-          address = snapshot['address'] ?? '';
+          email = user.email ?? ''; // Get email from FirebaseAuth
           bloodType = snapshot['bloodType'] ?? '';
           isLoading = false; // Data has been loaded
         });
@@ -55,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
         // Save data to Firestore using the user UID as the document ID
         await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
           'name': name,
-          'address': address,
+          'email': email, // Store email in Firestore
           'bloodType': bloodType,
         });
 
@@ -87,11 +87,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 onChanged: (value) => name = value,
                 validator: (value) => value!.isEmpty ? 'Please enter your name' : null,
               ),
+              // Display email as a non-editable field
               TextFormField(
-                initialValue: address,
-                decoration: InputDecoration(labelText: 'Address'),
-                onChanged: (value) => address = value,
-                validator: (value) => value!.isEmpty ? 'Please enter your address' : null,
+                initialValue: email,
+                decoration: InputDecoration(labelText: 'Email'),
+                readOnly: true, // Make email field read-only
               ),
               TextFormField(
                 initialValue: bloodType,

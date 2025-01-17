@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';  // Import FirebaseAuth
-
+import 'package:blood_donation/HomeScreen.dart';
 class CreateRequestPage extends StatefulWidget {
   @override
   _CreateRequestPageState createState() => _CreateRequestPageState();
@@ -108,6 +108,7 @@ class _CreateRequestPageState extends State<CreateRequestPage> {
       }
 
       try {
+        // Add the request to Firestore
         await FirebaseFirestore.instance.collection('bloodRequests').add({
           'patientName': _patientNameController.text.trim(),
           'contactNumber': _contactNumberController.text.trim(),
@@ -119,7 +120,12 @@ class _CreateRequestPageState extends State<CreateRequestPage> {
         });
 
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Request Created!')));
-        Navigator.pop(context);
+
+        // Navigate to HomeScreen using pushReplacement
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()), // Adjust the HomeScreen import as needed
+        );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
       }
